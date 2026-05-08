@@ -1,0 +1,31 @@
+using UnityEngine;
+
+public class Missile : MonoBehaviour
+{
+ public float speed;
+   void Start()
+    {
+        Destroy(gameObject, 3);
+    }
+    void Update()
+    {
+  
+
+          //Каждый кадр позиция шара обновляется на произведение вектора движения вперёд (0,0,1),
+        //скорости движения шара и значение разницы в секундах между последним и текущим кадрами
+
+        transform.position += transform.forward * speed * Time.deltaTime;
+    }
+ 
+    void OnTriggerEnter(Collider other) {
+ 
+        //Враг уничтожается
+        Enemy enemy = other.GetComponent<Enemy>();
+        Destroy(enemy.gameObject);
+ 
+        //Снаряд уничтожается
+        Destroy(gameObject);
+ 
+    }
+
+}
